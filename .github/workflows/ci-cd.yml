@@ -1,0 +1,82 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      
+      - name: Set up Python
+        run: uv python install 3.13
+      
+      - name: Install dependencies
+        run: uv sync --dev
+      
+      - name: Lint with ruff
+        run: uv run ruff check
+      
+      - name: Check formatting
+        run: uv run ruff format --check
+      
+      - name: Type check
+        run: uv run ty check
+      
+      - name: Run tests
+        run: uv run pytest
+      
+      - name: Security audit
+        run: uv audit --preview-features audit
+
+  build-and-publish:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    permissions:
+      contents: write  # Required for uploading release assets
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      
+      - name: Set up Python
+        run: uv python install 3.13
+      
+      - name: Install dependencies
+        run: uv sync --dev
+      
+      - name: Set dynamic version from tag
+        run: |
+          # Extract version from git tag (removes 'v' prefix if present)
+          VERSION=${GITHUB_REF#refs/tags/}
+          VERSION=${VERSION#v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          
+          # Update version in pyproject.toml
+          sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
+          
+          echo "Building version: $VERSION"
+      
+      - name: Build package
+        run: uv run python -m build
+      
+      - name: Upload artifacts to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          fail_on_unmatched_files: true
