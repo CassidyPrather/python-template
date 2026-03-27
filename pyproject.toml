@@ -33,6 +33,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.version]
 source = "vcs"
+raw-options = { version_scheme = "no-guess-dev" }
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/python_template/_version.py"
