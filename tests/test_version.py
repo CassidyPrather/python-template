@@ -4,6 +4,7 @@ import re
 import subprocess  # noqa: S404
 import sys
 
+import python_template
 from python_template import __version__
 
 
@@ -27,9 +28,10 @@ def test_version_format() -> None:
 
 
 def test_version_subcommand() -> None:
-    """Test 'python-template version' subcommand displays version."""
+    """Test version subcommand displays version."""
+    package_name = python_template.__package__ or "python_template"
     result = subprocess.run(  # noqa: S603
-        [sys.executable, "-m", "python_template", "version"],
+        [sys.executable, "-m", package_name, "version"],
         capture_output=True,
         text=True,
         check=False,
@@ -39,9 +41,10 @@ def test_version_subcommand() -> None:
 
 
 def test_version_flag() -> None:
-    """Test 'python-template --version' flag displays version."""
+    """Test --version flag displays version."""
+    package_name = python_template.__package__ or "python_template"
     result = subprocess.run(  # noqa: S603
-        [sys.executable, "-m", "python_template", "--version"],
+        [sys.executable, "-m", package_name, "--version"],
         capture_output=True,
         text=True,
         check=False,

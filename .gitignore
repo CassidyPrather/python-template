@@ -10,4 +10,4 @@ wheels/
 .venv
 
 # Auto-generated version file
-src/python_template/_version.py
+src/*/_version.py

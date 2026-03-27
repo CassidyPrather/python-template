@@ -1,15 +1,24 @@
-"""Command-line interface for python-template.
+"""Command-line interface.
 
 This module provides the main CLI entry point and argument parsing.
 Subcommands are defined in separate files under the commands/ directory.
 """
 
 import argparse
+import importlib.metadata
 import logging
 import sys
 
 from python_template import __version__
 from python_template.commands import version_cmd
+
+# Get package name dynamically from installed metadata
+try:
+    _PACKAGE_METADATA = importlib.metadata.metadata(__package__ or "python_template")
+    _CLI_NAME = _PACKAGE_METADATA["Name"]
+except (importlib.metadata.PackageNotFoundError, KeyError):
+    # Fallback if metadata not available (e.g., editable install issues)
+    _CLI_NAME = "python-template"
 
 _logger = logging.getLogger(__name__)
 
@@ -51,8 +60,8 @@ def create_parser() -> argparse.ArgumentParser:
     """
     # Main parser with global arguments
     parser = argparse.ArgumentParser(
-        prog="python-template",
-        description="Python template CLI tool",
+        prog=_CLI_NAME,
+        description=f"{_CLI_NAME} CLI tool",
     )
     parser.add_argument(
         "--version",
