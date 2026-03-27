@@ -3,13 +3,13 @@ revision = 3
 requires-python = "==3.13.*"
 
 [options]
-exclude-newer = "2026-03-20T03:50:01.2905496Z"
+exclude-newer = "2026-03-20T04:09:36.6052129Z"
 exclude-newer-span = "P7D"
 
 [options.exclude-newer-package]
-defusedxml = { timestamp = "2026-03-26T03:50:01.2905657Z", span = "P1D" }
-ruff = { timestamp = "2026-03-25T03:50:01.2905792Z", span = "P2D" }
-ty = { timestamp = "2026-03-26T03:50:01.2905827Z", span = "P1D" }
+defusedxml = { timestamp = "2026-03-26T04:09:36.6052322Z", span = "P1D" }
+ruff = { timestamp = "2026-03-25T04:09:36.6052459Z", span = "P2D" }
+ty = { timestamp = "2026-03-26T04:09:36.6052493Z", span = "P1D" }
 
 [[package]]
 name = "attrs"
@@ -556,7 +556,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3.3,<9" },
     { name = "pytest-cov", specifier = ">=7.0.0,<8" },
     { name = "pytest-trio", specifier = ">=0.8.0,<1" },
-    { name = "requests", specifier = ">=2.32.0,<3" },
+    { name = "requests", specifier = ">=2.32.5,<3" },
     { name = "ruff", specifier = ">=0.14.3,<1" },
     { name = "twine", specifier = ">=6.2.0,<7" },
     { name = "ty", specifier = ">=0.0.25,<1" },
