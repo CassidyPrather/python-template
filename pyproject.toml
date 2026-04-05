@@ -46,6 +46,9 @@ defusedxml = "1d"
 ruff = "2d"
 ty = "1d"
 
+[tool.ruff]
+extend-exclude = ["src/python_template/_version.py"]
+
 [tool.ruff.lint]
 preview = true # I'm not a coward!
 
