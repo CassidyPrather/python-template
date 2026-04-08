@@ -16,7 +16,7 @@ Always follow red/green TDD:
 2. Write the minimum code to make it pass (green)
 3. Refactor if needed
 
-**Import errors do not count as red.** A test that fails due to an `ImportError` or `ModuleNotFoundError` is not a valid red test — the module/function must exist before the test can legitimately fail for the right reason.
+**Import errors do not count as red.** A test that fails due to an `ImportError` or `ModuleNotFoundError` is not a valid red test — the module/function must exist as a stub before the test can legitimately fail for the right reason.
 
 ## After Every Code Assignment
 
