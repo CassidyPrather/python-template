@@ -63,7 +63,7 @@ def test_parser_has_version_flag() -> None:
 
 def test_parser_no_subcommand_shows_help() -> None:
     """Test that running with no subcommand shows help message."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(
         [sys.executable, "-m", "python_template"],
         capture_output=True,
         text=True,
