@@ -13,8 +13,11 @@ Example registration in cli.py:
     example.add_parser(subparsers, common_parser)
 """
 
-import argparse
 import logging
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import argparse
 
 _logger = logging.getLogger(__name__)
 
@@ -61,6 +64,6 @@ def run(args: argparse.Namespace) -> int:
     _logger.debug("Greeting: %s", args.greeting)
 
     # Your command logic here
-    print(f"{args.greeting}, {args.name}!")  # noqa: T201
+    print(f"{args.greeting}, {args.name}!")  # ruff: ignore[print]
 
     return 0

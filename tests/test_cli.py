@@ -1,7 +1,7 @@
 """Tests for CLI parser and entry point."""
 
 import argparse
-import subprocess  # noqa: S404
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 from io import StringIO
 from unittest.mock import patch

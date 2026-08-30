@@ -1,7 +1,7 @@
 """Integration tests for CLI functionality."""
 
 import re
-import subprocess  # noqa: S404
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 
 import pytest
@@ -14,7 +14,7 @@ _PACKAGE_NAME: str = python_template.__package__ or "python_template"
 
 def test_cli_help() -> None:
     """Test that CLI help works."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "--help"],
         capture_output=True,
         text=True,
@@ -27,7 +27,7 @@ def test_cli_help() -> None:
 
 def test_cli_version_flag() -> None:
     """Test --version flag."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "--version"],
         capture_output=True,
         text=True,
@@ -41,7 +41,7 @@ def test_cli_version_flag() -> None:
 
 def test_cli_version_subcommand() -> None:
     """Test version subcommand."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "version"],
         capture_output=True,
         text=True,
@@ -55,7 +55,7 @@ def test_cli_version_subcommand() -> None:
 
 def test_cli_verbose_flag() -> None:
     """Test that -v flag enables INFO logging."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "-v", "version"],
         capture_output=True,
         text=True,
@@ -67,7 +67,7 @@ def test_cli_verbose_flag() -> None:
 
 def test_cli_very_verbose_flag() -> None:
     """Test that -vv flag enables DEBUG logging."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "-vv", "version"],
         capture_output=True,
         text=True,
@@ -80,7 +80,7 @@ def test_cli_very_verbose_flag() -> None:
 
 def test_cli_no_subcommand() -> None:
     """Test that running without subcommand shows help."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME],
         capture_output=True,
         text=True,
@@ -92,7 +92,7 @@ def test_cli_no_subcommand() -> None:
 
 def test_cli_invalid_subcommand() -> None:
     """Test that invalid subcommand shows error."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "invalid"],
         capture_output=True,
         text=True,
@@ -104,7 +104,7 @@ def test_cli_invalid_subcommand() -> None:
 
 def test_version_subcommand_help() -> None:
     """Test that version subcommand has help."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "version", "--help"],
         capture_output=True,
         text=True,
@@ -146,7 +146,7 @@ assert __version__ and isinstance(__version__, str)
 print("SUCCESS")
 """
 
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-c", code],
         capture_output=True,
         text=True,
@@ -159,7 +159,7 @@ print("SUCCESS")
 @pytest.mark.skip(reason="Example command not registered - template only")
 def test_example_subcommand() -> None:
     """Test example subcommand (when registered)."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", _PACKAGE_NAME, "example", "World"],
         capture_output=True,
         text=True,
@@ -172,7 +172,7 @@ def test_example_subcommand() -> None:
 @pytest.mark.skip(reason="Example command not registered - template only")
 def test_example_subcommand_with_greeting() -> None:
     """Test example subcommand with custom greeting."""
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [
             sys.executable,
             "-m",

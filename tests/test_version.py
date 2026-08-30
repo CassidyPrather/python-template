@@ -1,7 +1,7 @@
 """Tests for version management and version command."""
 
 import re
-import subprocess  # noqa: S404
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 
 import python_template
@@ -30,7 +30,7 @@ def test_version_format() -> None:
 def test_version_subcommand() -> None:
     """Test version subcommand displays version."""
     package_name = python_template.__package__ or "python_template"
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", package_name, "version"],
         capture_output=True,
         text=True,
@@ -43,7 +43,7 @@ def test_version_subcommand() -> None:
 def test_version_flag() -> None:
     """Test --version flag displays version."""
     package_name = python_template.__package__ or "python_template"
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(  # ruff: ignore[subprocess-without-shell-equals-true]
         [sys.executable, "-m", package_name, "--version"],
         capture_output=True,
         text=True,

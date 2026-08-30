@@ -16,7 +16,7 @@ from python_template.commands import version_cmd
 try:
     _PACKAGE_METADATA = importlib.metadata.metadata(__package__ or "python_template")
     _CLI_NAME = _PACKAGE_METADATA["Name"]
-except (importlib.metadata.PackageNotFoundError, KeyError):
+except importlib.metadata.PackageNotFoundError, KeyError:
     # Fallback if metadata not available (e.g., editable install issues)
     _CLI_NAME = "python-template"
 
