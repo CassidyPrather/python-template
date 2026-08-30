@@ -17,5 +17,5 @@ def cli_name() -> str:
     # Dynamically get from package metadata if possible
     try:
         return importlib.metadata.metadata("python-template")["Name"]
-    except (importlib.metadata.PackageNotFoundError, KeyError):
+    except importlib.metadata.PackageNotFoundError, KeyError:
         return "python-template"

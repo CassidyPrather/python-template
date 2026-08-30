@@ -1,9 +1,12 @@
 """Version subcommand - display package version."""
 
-import argparse
 import logging
+from typing import TYPE_CHECKING
 
 from python_template import __version__
+
+if TYPE_CHECKING:
+    import argparse
 
 _logger = logging.getLogger(__name__)
 
@@ -35,5 +38,5 @@ def run(_args: argparse.Namespace) -> int:
     :return: Exit code (0 for success)
     """
     _logger.info("Displaying version information")
-    print(f"python-template {__version__}")  # noqa: T201
+    print(f"python-template {__version__}")  # ruff: ignore[print]
     return 0

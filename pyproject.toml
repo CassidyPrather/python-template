@@ -5,10 +5,10 @@ readme = "README.md"
 authors = [
     { name = "Cassidy Prather", email = "pratherea@gmail.com" }
 ]
-requires-python = ">=3.13, < 3.14"
+requires-python = ">=3.14, < 3.15"
 dependencies = [
     "defusedxml >= 0.7.1, < 1",
-    "trio >= 0.33.0, < 1",
+    "trio >= 0.34.0, < 1",
 ]
 
 [project.scripts]
@@ -16,15 +16,15 @@ python-template = "python_template.cli:main"
 
 [dependency-groups]
 dev = [
-    "ruff >= 0.14.3, < 1",
-    "ty >= 0.0.25, < 1",
-    "pytest >= 9.0.3, < 10",
-    "pytest-cov >= 7.0.0, < 8",
-    "gcovr >= 8.4, < 9",
-    "build >= 1.2.1, < 2",
-    "twine >= 6.2.0, < 7",
+    "ruff >= 0.16.5, < 1",
+    "ty >= 0.0.75, < 1",
+    "pytest >= 9.1.1, < 10",
+    "pytest-cov >= 7.1.0, < 8",
+    "gcovr >= 8.6, < 9",
+    "build >= 1.5.0, < 2",
+    "twine >= 7.0.0, < 8",
     "pytest-trio >= 0.8.0, < 1",
-    "requests >= 2.33.0, < 3",
+    "requests >= 2.34.2, < 3",
 ]
 
 [build-system]
@@ -117,22 +117,22 @@ select = [
 ]
 ignore = [
     "D10", # Undocumented stuff (not everything needs a docblock you dumb little [___])
-    "D203", # Ruff throws a warning if you include both this and D211
-    "D213", # Ruff throws a warning if you include both this and D212
-    "DOC201", # Rule is broken and doesn't detect :return: clauses
-    "DOC501", # Doesn't detect :raises: clauses and fails to ignore abstract
-    "EM101", # Doesn't account for custom constructors
+    "incorrect-blank-line-before-class", # Conflicts with `blank-line-before-class`
+    "multi-line-summary-second-line", # Conflicts with `multi-line-summary-first-line`
+    "docstring-missing-returns", # Rule is broken and doesn't detect :return: clauses
+    "docstring-missing-exception", # Doesn't detect :raises: clauses and fails to ignore abstract
+    "raw-string-in-exception", # Doesn't account for custom constructors
     "PLR09", # Complexity begets defects, and these rules promote Complexity
-    "PLR1702", # Redundant with max line width
-    "PLR6301", # Rule is broken (doesn't work for implementations of abstract)
-    "PLR2004", # Magic values aren't always bad. Sometimes, fewer lines are nice
-    "COM812", # Broken, see: https://github.com/astral-sh/ruff/issues/9216
-    "TRY400", # ??? https://docs.python.org/3/library/logging.html#logging-levels
+    "too-many-nested-blocks", # Redundant with max line width
+    "no-self-use", # Rule is broken (doesn't work for implementations of abstract)
+    "magic-value-comparison", # Magic values aren't always bad. Sometimes, fewer lines are nice
+    "missing-trailing-comma", # Broken, see: https://github.com/astral-sh/ruff/issues/9216
+    "error-instead-of-exception", # ??? https://docs.python.org/3/library/logging.html#logging-levels
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = [
-    "S101", # Allow assert in tests
+    "assert", # Allow `assert` in tests
 ]
 
 [tool.ruff.format]
