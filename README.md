@@ -6,7 +6,7 @@ Cassidy's opinionated Python template. Enter at your own peril.
 
 Requires [uv](https://docs.astral.sh/uv/)
 
-Setup: `uv sync --dev`
+Setup: `uv sync --dev --locked`
 
 Lint: `uv run ruff check`
 
@@ -17,6 +17,10 @@ Type-check: `uv run ty check`
 Test: `uv run pytest`
 
 Security audit: `uv audit --preview-features audit`
+
+`--locked` fails if `uv.lock` is stale rather than silently re-resolving. CI
+sets `UV_LOCKED=1` so this applies to every uv command. When you change
+dependencies, run `uv lock` and commit the result.
 
 ## Template Setup
 
@@ -44,8 +48,10 @@ Security audit: `uv audit --preview-features audit`
    - Replace the title and description
    - Remove or customize this Template Setup section
 
-7. **Initialize your environment**:
+7. **Initialize your environment** (you just edited `pyproject.toml`, so
+   refresh the lockfile and commit it):
    ```bash
+   uv lock
    uv sync --dev
    ```
 
